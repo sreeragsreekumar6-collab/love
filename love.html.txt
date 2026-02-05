@@ -1,0 +1,86 @@
+<script>
+const letterText = `
+From the moment you came into my life,
+everything became softer, warmer, and more beautiful.
+
+You are my safe place, my smile on hard days,
+and my favorite thought every night.
+
+Since 15-04-2024, the day we became "us",
+my world has felt more complete, more alive.
+
+I choose you — today, tomorrow, and always.
+
+Forever yours,
+Nandhuuu 💞
+`;
+
+function checkPassword() {
+    const pass = document.getElementById("password").value;
+    if (pass === "15042024") {
+        heartBurst(); // 💥
+        setTimeout(() => {
+            document.getElementById("loginBox").style.display = "none";
+            document.getElementById("letterBox").style.display = "block";
+            typeLetter(); // ✍️ typing starts
+        }, 900);
+    } else {
+        alert("Wrong password 💔 Try again, my love");
+    }
+}
+
+/* 💖 FLOATING HEARTS */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+}
+setInterval(createHeart, 400);
+
+/* 💥 HEART BURST */
+function heartBurst() {
+    for (let i = 0; i < 30; i++) {
+        const heart = document.createElement("div");
+        heart.innerHTML = "❤";
+        heart.style.position = "absolute";
+        heart.style.left = "50%";
+        heart.style.top = "50%";
+        heart.style.fontSize = (16 + Math.random() * 20) + "px";
+        heart.style.color = "#ff4d6d";
+        heart.style.transform = "translate(-50%, -50%)";
+        heart.style.zIndex = "3";
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = 120 + Math.random() * 150;
+
+        heart.animate([
+            { transform: "translate(-50%, -50%) scale(1)", opacity: 1 },
+            { transform: `translate(${Math.cos(angle)*distance}px, ${Math.sin(angle)*distance}px) scale(1.5)`, opacity: 0 }
+        ], { duration: 1200, easing: "ease-out" });
+
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1200);
+    }
+}
+
+/* ✍️ TYPING EFFECT */
+function typeLetter() {
+    const el = document.getElementById("typedLetter");
+    el.classList.add("typing");
+    let i = 0;
+    const speed = 40;
+
+    function type() {
+        if (i < letterText.length) {
+            el.textContent += letterText.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+</script>
